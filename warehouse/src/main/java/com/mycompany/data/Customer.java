@@ -14,10 +14,10 @@ public class Customer {
     private String contactPerson;
     private String address;
     private String city;
-    private long postCode;
+    private int postCode;
     private String Country;
 
-    public Customer(int customerId, String customerName, String contactPerson, String address, String city, long postCode, String Country) {
+    public Customer(int customerId, String customerName, String contactPerson, String address, String city, int postCode, String Country) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.contactPerson = contactPerson;
@@ -75,7 +75,7 @@ public class Customer {
         this.city = city;
     }
 
-    public void setPostCode(long postCode) {
+    public void setPostCode(int postCode) {
         this.postCode = postCode;
     }
 
