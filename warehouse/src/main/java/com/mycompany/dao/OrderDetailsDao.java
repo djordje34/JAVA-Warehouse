@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author Djordje
  */
-public class OrderDetailsDao {
+public class OrderDetailsDao implements OrderDetailsDaoInt{
     
     private static OrderDetailsDao instance = new OrderDetailsDao();
     
@@ -80,7 +80,7 @@ public class OrderDetailsDao {
     
     
     
-    public int create(Connection con, OrderDetails orderDetails) throws SQLException, WarehouseException {
+    public void create(Connection con, OrderDetails orderDetails) throws SQLException{
         PreparedStatement ps = null;
         ResultSet rs = null;
         int id = -1;
@@ -90,10 +90,10 @@ public class OrderDetailsDao {
             Order order = OrderDao.getInstance().find(con, orderDetails.getOrder().getOrderId());
             Product product = ProductDao.getInstance().find(con, orderDetails.getProduct().getProductId());
             if (order == null) {
-                throw new WarehouseException("Order " + orderDetails.getOrder() + " doesn't exist in database.");
+                throw new SQLException("Order " + orderDetails.getOrder() + " doesn't exist in database.");
             }
             else if(product == null){
-                throw new WarehouseException("Product " + orderDetails.getProduct() + " doesn't exist in database.");
+                throw new SQLException("Product " + orderDetails.getProduct() + " doesn't exist in database.");
             }
             
             ps.setInt(1, order.getOrderId());
@@ -106,7 +106,6 @@ public class OrderDetailsDao {
         } finally {
             ResourcesManager.closeResources(rs, ps);
         }
-        return id;
     }
     
     

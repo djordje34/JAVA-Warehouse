@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Djordje
  */
-public class ProductDao {
+public class ProductDao implements ProductDaoInt{
     private static final ProductDao instance = new ProductDao();
     
     private ProductDao(){
@@ -73,7 +73,7 @@ public class ProductDao {
         }
     }
     
-    public int create(Connection con, Product product) throws SQLException, WarehouseException {
+    public void create(Connection con, Product product) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         int id = -1;
@@ -84,7 +84,7 @@ public class ProductDao {
             ps.setInt(3, product.getPricePerUnit());
             Supplier supplier = SupplierDao.getInstance().find(con, product.getSupplier().getSupplierId());
             if (supplier == null) {
-                throw new WarehouseException("Shipper " + product.getSupplier() + " doesn't exist in database.");
+                throw new SQLException("Shipper " + product.getSupplier() + " doesn't exist in database.");
             }
             ps.setInt(4, supplier.getSupplierId());
             ps.executeUpdate();
@@ -94,7 +94,6 @@ public class ProductDao {
         } finally {
             ResourcesManager.closeResources(rs, ps);
         }
-        return id;
     }
     
     

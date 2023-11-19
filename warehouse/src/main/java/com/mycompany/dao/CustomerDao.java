@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Djordje
  */
-public class CustomerDao {
+public class CustomerDao implements CustomerDaoInt{
     private static final CustomerDao instance = new CustomerDao();
     
     private CustomerDao(){

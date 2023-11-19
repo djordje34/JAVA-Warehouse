@@ -6,10 +6,7 @@ package com.mycompany.dao;
 import com.mycompany.data.Customer;
 import com.mycompany.data.Employee;
 import com.mycompany.data.Order;
-import com.mycompany.data.Product;
 import com.mycompany.data.Shipper;
-import com.mycompany.data.Supplier;
-import com.mycompany.exception.WarehouseException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -23,7 +20,7 @@ import java.util.List;
  *
  * @author Djordje
  */
-public class OrderDao {
+public class OrderDao implements OrderDaoInt{
     private static OrderDao instance = new OrderDao();
     
     private OrderDao(){
@@ -79,9 +76,9 @@ public class OrderDao {
             ResourcesManager.closeResources(null, ps);
         }
     }
+
     
-    
-    public int create(Connection con, Order order) throws SQLException, WarehouseException {
+    public void create(Connection con, Order order) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         int id = -1;
@@ -93,13 +90,13 @@ public class OrderDao {
             Customer customer = CustomerDao.getInstance().find(con, order.getCustomer().getCustomerId());
             Employee employee = EmployeeDao.getInstance().find(con, order.getEmployee().getEmployeeId());
             if (shipper == null) {
-                throw new WarehouseException("Shipper " + order.getShipper() + " doesn't exist in database.");
+                throw new SQLException("Shipper " + order.getShipper() + " doesn't exist in database.");
             }
             else if(customer == null){
-                throw new WarehouseException("Customer " + order.getCustomer() + " doesn't exist in database.");
+                throw new SQLException("Customer " + order.getCustomer() + " doesn't exist in database.");
             }
             else if(employee == null){
-                throw new WarehouseException("Employee " + order.getEmployee() + " doesn't exist in database.");
+                throw new SQLException("Employee " + order.getEmployee() + " doesn't exist in database.");
             }
             
             ps.setInt(2, shipper.getShipperId());
@@ -112,7 +109,6 @@ public class OrderDao {
         } finally {
             ResourcesManager.closeResources(rs, ps);
         }
-        return id;
     }
     
     

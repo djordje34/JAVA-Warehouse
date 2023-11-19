@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Djordje
  */
-public class EmployeeDao {
+public class EmployeeDao implements EmployeeDaoInt{
     private static final EmployeeDao instance = new EmployeeDao();
     
     private EmployeeDao(){

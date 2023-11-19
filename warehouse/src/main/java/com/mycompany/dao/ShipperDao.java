@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Djordje
  */
-public class ShipperDao {
+public class ShipperDao implements ShipperDaoInt{
     private static ShipperDao instance = new ShipperDao();
     
     private ShipperDao(){
