@@ -21,7 +21,7 @@ import java.util.Map;
  *
  * @author Djordje
  */
-public class OrderDetailsDao implements OrderDetailsDaoInt{
+public class OrderDetailsDao{
     
     private static OrderDetailsDao instance = new OrderDetailsDao();
     
@@ -38,7 +38,12 @@ public class OrderDetailsDao implements OrderDetailsDaoInt{
         ResultSet rs = null;
         OrderDetails orderDetails = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM orderdetails WHERE OrderDetailsId=?");
+            ps = con.prepareStatement("SELECT"
+                    + " * "
+                    + "FROM"
+                    + " orderdetails"
+                    + " WHERE "
+                    + "OrderDetailsId=?");
             ps.setInt(1, dataObjectId);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -56,7 +61,11 @@ public class OrderDetailsDao implements OrderDetailsDaoInt{
     public void delete(Connection con, int dataObjectId) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("DELETE FROM orderdetails WHERE OrderDetailsId=?");
+            ps = con.prepareStatement("DELETE"
+                    + " FROM "
+                    + "orderdetails "
+                    + "WHERE "
+                    + "OrderDetailsId=?");
             ps.setInt(1, dataObjectId);
             ps.executeUpdate();
         } finally {
@@ -67,7 +76,12 @@ public class OrderDetailsDao implements OrderDetailsDaoInt{
     public void update(Connection con, OrderDetails orderDetails) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("UPDATE orderdetails SET OrderId=?, ProductId=?, Quantity=? WHERE OrderDetailsId=?");
+            ps = con.prepareStatement("UPDATE "
+                    + "orderdetails "
+                    + "SET "
+                    + "OrderId=?, ProductId=?, Quantity=? "
+                    + "WHERE"
+                    + " OrderDetailsId=?");
             ps.setInt(1, orderDetails.getOrder().getOrderId());
             ps.setInt(2, orderDetails.getProduct().getProductId());
             ps.setInt(3, orderDetails.getQuantity());
@@ -86,7 +100,9 @@ public class OrderDetailsDao implements OrderDetailsDaoInt{
         ResultSet rs = null;
         int id = -1;
         try {
-            ps = con.prepareStatement("INSERT INTO orderdetails(OrderId, ProductId, Quantity) VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement("INSERT INTO "
+                    + "orderdetails(OrderId, ProductId, Quantity) "
+                    + "VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
             
             Order order = OrderDao.getInstance().find(con, orderDetails.getOrder().getOrderId());
             Product product = ProductDao.getInstance().find(con, orderDetails.getProduct().getProductId());
@@ -115,7 +131,10 @@ public class OrderDetailsDao implements OrderDetailsDaoInt{
                 ResultSet rs = null;
                 List <OrderDetails> l = new ArrayList<>();
                 try{
-                    ps = con.prepareStatement("SELECT * FROM orderdetails");
+                    ps = con.prepareStatement("SELECT"
+                            + " * "
+                            + "FROM "
+                            + "orderdetails");
                    
                     rs = ps.executeQuery();
                     while (rs.next()) {
@@ -137,12 +156,12 @@ public class OrderDetailsDao implements OrderDetailsDaoInt{
         ResultSet rs = null;
         int res = 0;
         try{
-                    ps = con.prepareStatement("SELECT\n" +
-                                        " SUM(p.PricePerUnit * od.Quantity) AS uk_cena\n" +
-                                        "FROM\n" +
-                                        "  orderdetails od\n" +
-                                        "JOIN\n" +
-                                        "  products p ON od.ProductId = p.ProductId;");
+                    ps = con.prepareStatement("SELECT " +
+                                        "SUM(p.PricePerUnit * od.Quantity) AS uk_cena\n" +
+                                        "FROM\n " +
+                                        "orderdetails od " +
+                                        "JOIN " +
+                                        "products p ON od.ProductId = p.ProductId");
                    
                     rs = ps.executeQuery();
                     while (rs.next()) {
@@ -161,20 +180,20 @@ public class OrderDetailsDao implements OrderDetailsDaoInt{
         ResultSet rs = null;
         int uk_cena = 0;
         try{
-                    ps = con.prepareStatement("SELECT \n" +
-                            "  SUM(p.PricePerUnit * od.Quantity) AS uk_cena\n" +
-                            "FROM\n" +
-                            "  customers c\n" +
-                            "JOIN\n" +
-                            "  orders o ON c.CustomerId = o.CustomerId\n" +
-                            "JOIN\n" +
-                            "  orderdetails od ON o.OrderId = od.OrderId\n" +
-                            "JOIN\n" +
-                            "  products p ON od.ProductId = p.ProductId\n" +
-                            "WHERE\n" +
-                            "  c.CustomerId = ?\n" +
-                            "GROUP BY\n" +
-                            "  c.CustomerId;");
+                    ps = con.prepareStatement("SELECT " +
+                            "SUM(p.PricePerUnit * od.Quantity) AS uk_cena " +
+                            "FROM " +
+                            "customers c " +
+                            "JOIN " +
+                            "  orders o ON c.CustomerId = o.CustomerId " +
+                            "JOIN " +
+                            "orderdetails od ON o.OrderId = od.OrderId " +
+                            "JOIN " +
+                            "products p ON od.ProductId = p.ProductId " +
+                            "WHERE " +
+                            "  c.CustomerId=? " +
+                            "GROUP BY " +
+                            "  c.CustomerId");
                    ps.setInt(1, dataObjectId);
                     rs = ps.executeQuery();
                     while (rs.next()) {
@@ -193,20 +212,20 @@ public class OrderDetailsDao implements OrderDetailsDaoInt{
         ResultSet rs = null;
         int uk_cena = 0;
         try{
-                    ps = con.prepareStatement("SELECT\n" +
-                                "  SUM(p.PricePerUnit * od.Quantity) AS uk_cena\n" +
-                                "FROM\n" +
-                                "  shippers s\n" +
-                                "JOIN\n" +
-                                "  orders o ON s.ShipperId = o.ShipperId\n" +
-                                "JOIN\n" +
-                                "  orderdetails od ON o.OrderId = od.OrderId\n" +
-                                "JOIN\n" +
-                                "  products p ON od.ProductId = p.ProductId\n" +
-                                "WHERE\n" +
-                                "  s.ShipperId=? \n" +
-                                "GROUP BY\n" +
-                                "  s.ShipperId;");
+                    ps = con.prepareStatement("SELECT " +
+                                "SUM(p.PricePerUnit * od.Quantity) AS uk_cena " +
+                                "FROM " +
+                                "shippers s " +
+                                "JOIN " +
+                                "orders o ON s.ShipperId = o.ShipperId " +
+                                "JOIN " +
+                                "orderdetails od ON o.OrderId = od.OrderId " +
+                                "JOIN " +
+                                "  products p ON od.ProductId = p.ProductId " +
+                                "WHERE " +
+                                "  s.ShipperId=? " +
+                                "GROUP BY " +
+                                "  s.ShipperId");
                    ps.setInt(1, dataObjectId);
                     rs = ps.executeQuery();
                     while (rs.next()) {
@@ -225,18 +244,18 @@ public class OrderDetailsDao implements OrderDetailsDaoInt{
         ResultSet rs = null;
         int uk_cena = 0;
         try{
-                    ps = con.prepareStatement("SELECT\n" +
-                    "  SUM(p.PricePerUnit * od.Quantity) AS uk_cena\n" +
-                    "FROM\n" +
-                    "  suppliers sup\n" +
-                    "JOIN\n" +
-                    "  products p ON sup.SupplierId = p.SupplierId\n" +
-                    "JOIN\n" +
-                    "  orderdetails od ON p.ProductId = od.ProductId\n" +
-                    "WHERE\n" +
-                    "  sup.SupplierId=? \n" +
-                    "GROUP BY\n" +
-                    "  sup.SupplierId;");
+                    ps = con.prepareStatement("SELECT " +
+                    "SUM(p.PricePerUnit * od.Quantity) AS uk_cena " +
+                    "FROM " +
+                    "suppliers sup " +
+                    "JOIN " +
+                    "products p ON sup.SupplierId = p.SupplierId " +
+                    "JOIN " +
+                    "orderdetails od ON p.ProductId = od.ProductId " +
+                    "WHERE " +
+                    "  sup.SupplierId=? " +
+                    "GROUP BY " +
+                    "  sup.SupplierId");
                    ps.setInt(1, dataObjectId);
                     rs = ps.executeQuery();
                     while (rs.next()) {

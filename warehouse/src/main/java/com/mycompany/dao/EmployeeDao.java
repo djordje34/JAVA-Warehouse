@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Djordje
  */
-public class EmployeeDao implements EmployeeDaoInt{
+public class EmployeeDao{
     private static final EmployeeDao instance = new EmployeeDao();
     
     private EmployeeDao(){
@@ -30,7 +30,12 @@ public class EmployeeDao implements EmployeeDaoInt{
         ResultSet rs = null;
         Employee employee = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM employees where EmployeeId=?");
+            ps = con.prepareStatement("SELECT"
+                    + " * "
+                    + "FROM "
+                    + "employees "
+                    + "WHERE "
+                    + "EmployeeId=?");
             ps.setInt(1, dataObjectId);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -46,7 +51,11 @@ public class EmployeeDao implements EmployeeDaoInt{
     public void delete(Connection con, int dataObjectId) throws SQLException{
         PreparedStatement ps = null;
         try{
-            ps = con.prepareStatement("DELETE FROM employees WHERE EmployeeId=?");
+            ps = con.prepareStatement("DELETE "
+                    + "FROM "
+                    + "employees "
+                    + "WHERE "
+                    + "EmployeeId=?");
             ps.setInt(1, dataObjectId);
             ps.executeUpdate();
         }
@@ -58,7 +67,11 @@ public class EmployeeDao implements EmployeeDaoInt{
     public void update(Connection con, Employee employee) throws SQLException{
         PreparedStatement ps = null;
         try{
-            ps = con.prepareStatement("UPDATE customers SET LastName=?, FirstName=?, BirthDate=? WHERE EmployeeId=?");
+            ps = con.prepareStatement("UPDATE "
+                    + "employees "
+                    + "SET LastName=?, FirstName=?, BirthDate=? "
+                    + "WHERE "
+                    + "EmployeeId=?");
             ps.setString(1, employee.getLastName());
             ps.setString(2, employee.getFirstName());
             ps.setDate(3, (Date) employee.getBirthDate());
@@ -75,7 +88,9 @@ public class EmployeeDao implements EmployeeDaoInt{
         PreparedStatement ps = null;
         ResultSet rs = null;
         try{
-            ps = con.prepareStatement("INSERT INTO employees(LastName, FirstName, BirthDate) VALUES(?,?,?)");
+            ps = con.prepareStatement("INSERT INTO "
+                    + "employees(LastName, FirstName, BirthDate) "
+                    + "VALUES(?,?,?)");
             ps.setString(1, employee.getLastName());
             ps.setString(2, employee.getFirstName());
             ps.setDate(3, (Date) employee.getBirthDate());
@@ -92,7 +107,10 @@ public class EmployeeDao implements EmployeeDaoInt{
                 ResultSet rs = null;
                 List <Employee> l = new ArrayList<>();
                 try{
-                    ps = con.prepareStatement("SELECT * FROM employees");
+                    ps = con.prepareStatement("SELECT"
+                            + " * "
+                            + "FROM "
+                            + "employees");
                    
                     rs = ps.executeQuery();
                     while (rs.next()) {
@@ -112,21 +130,21 @@ public class EmployeeDao implements EmployeeDaoInt{
         ResultSet rs = null;
         Employee emp = null;
         try{
-            ps = con.prepareStatement("SELECT\n" +
-                        "  e.EmployeeId,\n" +
-                        "  SUM(p.PricePerUnit * od.Quantity) AS uk_cena\n" +
-                        "FROM\n" +
-                        "  employees e\n" +
-                        "JOIN\n" +
-                        "  orders o ON e.EmployeeId = o.EmployeeId\n" +
-                        "JOIN\n" +
-                        "  orderdetails od ON o.OrderId = od.OrderId\n" +
-                        "JOIN\n" +
-                        "  products p ON od.ProductId = p.ProductId\n" +
-                        "GROUP BY \n" +
-                        "  e.EmployeeId, e.LastName, e.FirstName \n" +
-                        "ORDER BY \n" +
-                        "  uk_cena DESC \n" +
+            ps = con.prepareStatement("SELECT " +
+                        "e.EmployeeId, " +
+                        "SUM(p.PricePerUnit * od.Quantity) AS uk_cena " +
+                        "FROM " +
+                        "employees e " +
+                        "JOIN " +
+                        "orders o ON e.EmployeeId = o.EmployeeId " +
+                        "JOIN " +
+                        "orderdetails od ON o.OrderId = od.OrderId " +
+                        "JOIN " +
+                        "products p ON od.ProductId = p.ProductId " +
+                        "GROUP BY " +
+                        "e.EmployeeId, e.LastName, e.FirstName " +
+                        "ORDER BY " +
+                        "uk_cena DESC " +
                         "LIMIT 1;");
             rs = ps.executeQuery();
             if(rs.next()){

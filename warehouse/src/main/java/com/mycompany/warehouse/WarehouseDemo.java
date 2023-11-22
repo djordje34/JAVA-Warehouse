@@ -7,6 +7,7 @@ package com.mycompany.warehouse;
 import com.mycompany.data.Customer;
 import com.mycompany.data.Employee;
 import com.mycompany.data.Product;
+import com.mycompany.data.Supplier;
 import com.mycompany.service.AdvancedService;
 import com.mycompany.service.CustomerService;
 import com.mycompany.service.EmployeeService;
@@ -81,6 +82,14 @@ public class WarehouseDemo {
             System.out.println(l3.get(i));
         }
         System.out.println("################## 10");
+        List<Customer> l4 = advancedService.findFourBestCustomers();
+        for(int i=0;i<l4.size();i++){
+            System.out.println(l4.get(i));
+        }
+        System.out.println("################## 11");
+        Supplier sup1 = advancedService.findMostProfitableSupplier();
+        System.out.println(sup1);
+        
     }
     
     

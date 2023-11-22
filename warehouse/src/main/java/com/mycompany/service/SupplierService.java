@@ -96,7 +96,7 @@ public class SupplierService {
         }
     }
     
-    public List<Supplier> findAllShippers() throws WarehouseException{
+    public List<Supplier> findAllSuppliers() throws WarehouseException{
         Connection con = null;
         List <Supplier> l = new ArrayList<>();
         try{
@@ -112,5 +112,4 @@ public class SupplierService {
             ResourcesManager.closeConnection(con);
         }
     }
-    
 }

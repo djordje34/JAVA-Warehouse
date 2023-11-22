@@ -49,9 +49,10 @@ public class CustomerService {
     
     public Customer findCustomer(int dataObjectId) throws WarehouseException{
         Connection con = null;
+        Customer customer = null;
         try{
             con = ResourcesManager.getConnection();
-            return CustomerDao.getInstance().find(con, dataObjectId);
+            customer = CustomerDao.getInstance().find(con, dataObjectId);
         }
         catch(SQLException ex){
             throw new WarehouseException("Failed to find customer with ID " + dataObjectId, ex);
@@ -59,6 +60,7 @@ public class CustomerService {
         finally{
             ResourcesManager.closeConnection(con);
         }
+        return customer;
     }
     
     public void deleteCustomer(int dataObjectId) throws WarehouseException{

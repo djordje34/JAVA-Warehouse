@@ -17,7 +17,7 @@ import java.util.Map;
  *
  * @author Djordje
  */
-public class CustomerDao implements CustomerDaoInt{
+public class CustomerDao{
     private static final CustomerDao instance = new CustomerDao();
     
     private CustomerDao(){
@@ -32,7 +32,12 @@ public class CustomerDao implements CustomerDaoInt{
         ResultSet rs = null;
         Customer customer = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM customers where CustomerId=?");
+            ps = con.prepareStatement("SELECT"
+                    + " * "
+                    + "FROM "
+                    + "customers "
+                    + "WHERE "
+                    + "CustomerId=?");
             ps.setInt(1, dataObjectId);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -48,7 +53,11 @@ public class CustomerDao implements CustomerDaoInt{
     public void delete(Connection con, int dataObjectId) throws SQLException{
         PreparedStatement ps = null;
         try{
-            ps = con.prepareStatement("DELETE FROM customers WHERE CustomerId=?");
+            ps = con.prepareStatement("DELETE "
+                    + "FROM "
+                    + "customers "
+                    + "WHERE "
+                    + "CustomerId=?");
             ps.setInt(1, dataObjectId);
             ps.executeUpdate();
         }
@@ -60,7 +69,11 @@ public class CustomerDao implements CustomerDaoInt{
     public void update(Connection con, Customer customer) throws SQLException{
         PreparedStatement ps = null;
         try{
-            ps = con.prepareStatement("UPDATE customers SET CustomerName=?, ContactPerson=?, Address=?, City=?, PostCode=?, Country=? WHERE CustomerId=?");
+            ps = con.prepareStatement("UPDATE "
+                    + "customers "
+                    + "SET CustomerName=?, ContactPerson=?, Address=?, City=?, PostCode=?, Country=? "
+                    + "WHERE "
+                    + "CustomerId=?");
             ps.setString(1, customer.getCustomerName());
             ps.setString(2, customer.getContactPerson());
             ps.setString(3, customer.getAddress());
@@ -79,7 +92,9 @@ public class CustomerDao implements CustomerDaoInt{
         PreparedStatement ps = null;
         ResultSet rs = null;
         try{
-            ps = con.prepareStatement("INSERT INTO customers(CustomerName, ContactPerson, Address, City, PostCode, Country) VALUES(?,?,?,?,?,?)");
+            ps = con.prepareStatement("INSERT INTO "
+                    + "customers(CustomerName, ContactPerson, Address, City, PostCode, Country) "
+                    + "VALUES(?,?,?,?,?,?)");
             ps.setString(1, customer.getCustomerName());
             ps.setString(2, customer.getContactPerson());
             ps.setString(3, customer.getAddress());
@@ -98,7 +113,10 @@ public class CustomerDao implements CustomerDaoInt{
                 ResultSet rs = null;
                 List <Customer> l = new ArrayList<>();
                 try{
-                    ps = con.prepareStatement("SELECT * FROM customers");
+                    ps = con.prepareStatement("SELECT"
+                            + " * "
+                            + "FROM "
+                            + "customers");
                    
                     rs = ps.executeQuery();
                     while (rs.next()) {
@@ -118,15 +136,15 @@ public class CustomerDao implements CustomerDaoInt{
     List<String> l = new ArrayList<>();
 
     try {
-        ps = con.prepareStatement("SELECT\n" +
-                "  c.CustomerName,\n" +
-                "  o.OrderId\n" +
-                "FROM\n" +
-                "  customers c\n" +
-                "JOIN\n" +
-                "  orders o ON c.CustomerId = o.CustomerId\n" +
-                "ORDER BY\n" +
-                "  c.CustomerName;");
+        ps = con.prepareStatement("SELECT " +
+                "c.CustomerName, " +
+                "o.OrderId " +
+                "FROM " +
+                "customers c " +
+                "JOIN " +
+                "orders o ON c.CustomerId = o.CustomerId " +
+                "ORDER BY " +
+                "c.CustomerName");
 
         rs = ps.executeQuery();
         while (rs.next()) {
@@ -140,6 +158,40 @@ public class CustomerDao implements CustomerDaoInt{
     }
 
     return l;
+    }
+    
+    public List<Customer> getBestCustomers(Connection con) throws SQLException{
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Customer> l = new ArrayList<>();
+        try{
+            ps = con.prepareStatement("SELECT " +
+                "c.*,  " +
+                "SUM(p.PricePerUnit * od.Quantity) AS uk_cena " +
+                "FROM " +
+                "customers c " +
+                "JOIN " +
+                "orders o ON c.CustomerId = o.CustomerId " +
+                "JOIN " +
+                "orderdetails od ON o.OrderId = od.OrderId " +
+                "JOIN " +
+                "products p ON od.ProductId = p.ProductId " +
+                "GROUP BY " +
+                "c.CustomerId " +
+                "ORDER BY " +
+                "uk_cena DESC " +
+                "LIMIT 4");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                System.out.println("CustomerId: "+ rs.getInt("CustomerId")+ " Total money spent: "+ rs.getInt("uk_cena"));
+                l.add(new Customer(rs.getInt("CustomerId"), rs.getString("CustomerName"), rs.getString("ContactPerson"),
+           rs.getString("Address"), rs.getString("City"),rs.getInt("PostCode"),rs.getString("Country")));
+            }
+        }
+        finally{
+            ResourcesManager.closeResources(rs,ps);
+        }
+        return l;
     }
     
 }

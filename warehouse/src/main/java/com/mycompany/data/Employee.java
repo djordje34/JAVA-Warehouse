@@ -22,6 +22,9 @@ public class Employee {
         this.firstName = firstName;
         this.birthDate = birthDate;
     }
+    public Employee(){
+        
+    }
 
     public int getEmployeeId() {
         return employeeId;

@@ -26,6 +26,8 @@ public class Customer {
         this.postCode = postCode;
         this.Country = Country;
     }
+    public Customer(){
+    }
 
     public int getCustomerId() {
         return customerId;

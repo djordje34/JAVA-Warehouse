@@ -9,15 +9,16 @@ import com.mycompany.dao.EmployeeDao;
 import com.mycompany.dao.OrderDetailsDao;
 import com.mycompany.dao.ProductDao;
 import com.mycompany.dao.ResourcesManager;
+import com.mycompany.dao.SupplierDao;
+import com.mycompany.data.Customer;
 import com.mycompany.data.Employee;
 import com.mycompany.data.Product;
+import com.mycompany.data.Supplier;
 import com.mycompany.exception.WarehouseException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -210,5 +211,48 @@ public class AdvancedService {
         }
         return l;
     }
+    
+    public List <Customer> findFourBestCustomers() throws WarehouseException{
+        Connection con = null;
+        List <Customer> l = new ArrayList<>();
+        try{
+            con = ResourcesManager.getConnection();
+            con.setAutoCommit(false);
+            l = CustomerDao.getInstance().getBestCustomers(con);
+            con.commit();
+        }
+        catch(SQLException ex){
+            ResourcesManager.rollbackTransactions(con);
+            throw new WarehouseException("Failed to find the four best customers based on money spent"  , ex);
+        }
+        finally{
+            ResourcesManager.closeConnection(con);
+        }
+        return l;
+    }
+    
+    
+    public Supplier findMostProfitableSupplier() throws WarehouseException{
+        Connection con = null;
+        Supplier supplier = null;
+        try{
+            con = ResourcesManager.getConnection();
+            con.setAutoCommit(false);
+            supplier = SupplierDao.getInstance().findMostProfitable(con);
+            con.commit();
+        }
+        catch(SQLException ex){
+            ResourcesManager.rollbackTransactions(con);
+            throw new WarehouseException("Failed to find the most profitable supplier"  , ex);
+        
+        }
+        finally{
+            ResourcesManager.closeConnection(con);
+        }
+        
+        return supplier;
+    }
+    
+    
     
 }

@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author Djordje
  */
-public class OrderDao implements OrderDaoInt{
+public class OrderDao{
     private static OrderDao instance = new OrderDao();
     
     private OrderDao(){
@@ -35,7 +35,12 @@ public class OrderDao implements OrderDaoInt{
         ResultSet rs = null;
         Order order = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM orders WHERE OrderId=?");
+            ps = con.prepareStatement("SELECT"
+                    + " * "
+                    + "FROM"
+                    + " orders "
+                    + "WHERE"
+                    + " OrderId=?");
             ps.setInt(1, dataObjectId);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -55,7 +60,11 @@ public class OrderDao implements OrderDaoInt{
     public void delete(Connection con, int dataObjectId) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("DELETE FROM orders WHERE OrderId=?");
+            ps = con.prepareStatement("DELETE "
+                    + "FROM "
+                    + "orders "
+                    + "WHERE "
+                    + "OrderId=?");
             ps.setInt(1, dataObjectId);
             ps.executeUpdate();
         } finally {
@@ -66,7 +75,12 @@ public class OrderDao implements OrderDaoInt{
     public void update(Connection con, Order order) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("UPDATE orders SET OrderDate=?, ShipperId=?, CustomerId=?, EmployeeId=? WHERE OrderId=?");
+            ps = con.prepareStatement("UPDATE "
+                    + "orders "
+                    + "SET "
+                    + "OrderDate=?, ShipperId=?, CustomerId=?, EmployeeId=? "
+                    + "WHERE "
+                    + "OrderId=?");
             ps.setDate(1, (Date) order.getOrderDate());
             ps.setInt(2, order.getShipper().getShipperId());
             ps.setInt(3, order.getCustomer().getCustomerId());
@@ -83,7 +97,9 @@ public class OrderDao implements OrderDaoInt{
         ResultSet rs = null;
         int id = -1;
         try {
-            ps = con.prepareStatement("INSERT INTO orders(OrderDate, ShipperId, CustomerId, EmployeeId) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement("INSERT INTO "
+                    + "orders(OrderDate, ShipperId, CustomerId, EmployeeId) "
+                    + "VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setDate(1, (Date) order.getOrderDate());
             
             Shipper shipper = ShipperDao.getInstance().find(con, order.getShipper().getShipperId());
@@ -117,7 +133,10 @@ public class OrderDao implements OrderDaoInt{
                 ResultSet rs = null;
                 List <Order> l = new ArrayList<>();
                 try{
-                    ps = con.prepareStatement("SELECT * FROM orders");
+                    ps = con.prepareStatement("SELECT"
+                            + " * "
+                            + "FROM "
+                            + "orders");
                    
                     rs = ps.executeQuery();
                     while (rs.next()) {

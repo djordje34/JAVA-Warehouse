@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Djordje
  */
-public class ProductDao implements ProductDaoInt{
+public class ProductDao{
     private static final ProductDao instance = new ProductDao();
     
     private ProductDao(){
@@ -33,7 +33,12 @@ public class ProductDao implements ProductDaoInt{
         ResultSet rs = null;
         Product product = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM products WHERE ProductId=?");
+            ps = con.prepareStatement("SELECT"
+                    + " * "
+                    + "FROM "
+                    + "products "
+                    + "WHERE "
+                    + "ProductId=?");
             ps.setInt(1, dataObjectId);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -49,7 +54,11 @@ public class ProductDao implements ProductDaoInt{
     public void delete(Connection con, int dataObjectId) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("DELETE FROM products WHERE ProductId=?");
+            ps = con.prepareStatement("DELETE "
+                    + "FROM "
+                    + "products "
+                    + "WHERE "
+                    + "ProductId=?");
             ps.setInt(1, dataObjectId);
             ps.executeUpdate();
         } finally {
@@ -61,7 +70,15 @@ public class ProductDao implements ProductDaoInt{
         public void update(Connection con, Product product) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("UPDATE products SET ProductName=?, ProductCategory=?, PricePerUnit=?, SupplierId=? WHERE ProductId=?");
+            ps = con.prepareStatement("UPDATE "
+                    + "products "
+                    + "SET "
+                    + "ProductName=?, "
+                    + "ProductCategory=?, "
+                    + "PricePerUnit=?, "
+                    + "SupplierId=? "
+                    + "WHERE "
+                    + "ProductId=?");
             ps.setString(1, product.getProductName());
             ps.setString(2, product.getProductCategory());
             ps.setInt(3, product.getPricePerUnit());
@@ -78,7 +95,11 @@ public class ProductDao implements ProductDaoInt{
         ResultSet rs = null;
         int id = -1;
         try {
-            ps = con.prepareStatement("INSERT INTO products(ProductName, ProductCategory, PricePerUnit, SupplierId) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement("INSERT INTO "
+                    + "products(ProductName, "
+                    + "ProductCategory, PricePerUnit, "
+                    + "SupplierId) "
+                    + "VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, product.getProductName());
             ps.setString(2, product.getProductCategory());
             ps.setInt(3, product.getPricePerUnit());
@@ -102,7 +123,9 @@ public class ProductDao implements ProductDaoInt{
                 ResultSet rs = null;
                 List <Product> l = new ArrayList<>();
                 try{
-                    ps = con.prepareStatement("SELECT * FROM products");
+                    ps = con.prepareStatement("SELECT"
+                                            + " * "
+                                            + "FROM products");
                    
                     rs = ps.executeQuery();
                     while (rs.next()) {
@@ -122,12 +145,12 @@ public class ProductDao implements ProductDaoInt{
                 ResultSet rs = null;
                 List <Product> l = new ArrayList<>();
                 try{
-                    ps = con.prepareStatement("    SELECT\n" +
-                                                "  *\n" +
-                                                "FROM\n" +
-                                                "  products\n" +
-                                                "WHERE\n" +
-                                                "  SupplierId=?");
+                    ps = con.prepareStatement("SELECT " +
+                                                "* " +
+                                                "FROM " +
+                                                "products " +
+                                                "WHERE " +
+                                                "SupplierId=? ");
                     ps.setInt(1, dataObjectId);
                     rs = ps.executeQuery();
                     while (rs.next()) {
@@ -148,15 +171,15 @@ public class ProductDao implements ProductDaoInt{
                 ResultSet rs = null;
                 List <Product> l = new ArrayList<>();
                 try{
-                        ps = con.prepareStatement("SELECT\n" +
-                            "  p.*\n" +
-                            "FROM\n" +
-                            "  products p\n" +
-                            "JOIN\n" +
-                            "  orderdetails od ON p.ProductId = od.ProductId\n" +
-                            "JOIN\n" +
-                            "  orders o ON od.OrderId = o.OrderId\n" +
-                            "WHERE\n" +
+                        ps = con.prepareStatement("SELECT " +
+                            "  p.* " +
+                            "FROM" +
+                            "  products p " +
+                            "JOIN " +
+                            "  orderdetails od ON p.ProductId = od.ProductId " +
+                            "JOIN " +
+                            "  orders o ON od.OrderId = o.OrderId " +
+                            "WHERE " +
                             "  o.ShipperId=?");
                     ps.setInt(1, dataObjectId);
                     rs = ps.executeQuery();
@@ -177,17 +200,17 @@ public class ProductDao implements ProductDaoInt{
         ResultSet rs = null;
         List <Product> l = new ArrayList<>();
         try{
-            ps = con.prepareStatement("SELECT\n" +
-                    "  p.*,\n" +
-                    "  COUNT(*) AS br_order\n" +
-                    "FROM\n" +
-                    "  products p\n" +
-                    "JOIN\n" +
-                    "  orderdetails od ON p.ProductId = od.ProductId\n" +
+            ps = con.prepareStatement("SELECT " +
+                    "  p.*, " +
+                    "  COUNT(*) AS br_order " +
+                    "FROM " +
+                    "  products p " +
+                    "JOIN " +
+                    "  orderdetails od ON p.ProductId = od.ProductId " +
                     "GROUP BY\n" +
-                    "  p.ProductId, p.ProductName\n" +
-                    "ORDER BY\n" +
-                    "  br_order DESC\n" +
+                    "  p.ProductId, p.ProductName " +
+                    "ORDER BY " +
+                    "  br_order DESC " +
                     "LIMIT 2;");
                     rs = ps.executeQuery();
                     while(rs.next()){

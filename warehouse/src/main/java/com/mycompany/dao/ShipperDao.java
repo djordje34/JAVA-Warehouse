@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Djordje
  */
-public class ShipperDao implements ShipperDaoInt{
+public class ShipperDao{
     private static ShipperDao instance = new ShipperDao();
     
     private ShipperDao(){
@@ -30,7 +30,12 @@ public class ShipperDao implements ShipperDaoInt{
         ResultSet rs = null;
         Shipper shipper = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM shippers where ShipperId=?");
+            ps = con.prepareStatement("SELECT"
+                    + " * "
+                    + "FROM "
+                    + "shippers "
+                    + "WHERE "
+                    + "ShipperId=?");
             ps.setInt(1, dataObjectId);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -46,7 +51,11 @@ public class ShipperDao implements ShipperDaoInt{
     public void delete(Connection con, int dataObjectId) throws SQLException{
         PreparedStatement ps = null;
         try{
-            ps = con.prepareStatement("DELETE FROM shippers WHERE ShipperId=?");
+            ps = con.prepareStatement("DELETE "
+                    + "FROM "
+                    + "shippers "
+                    + "WHERE "
+                    + "ShipperId=?");
             ps.setInt(1, dataObjectId);
             ps.executeUpdate();
         }
@@ -58,7 +67,12 @@ public class ShipperDao implements ShipperDaoInt{
     public void update(Connection con, Shipper shipper) throws SQLException{
         PreparedStatement ps = null;
         try{
-            ps = con.prepareStatement("UPDATE shippers SET ShipperName=?, Phone=? WHERE ShipperId=?");
+            ps = con.prepareStatement("UPDATE "
+                    + "shippers "
+                    + "SET "
+                    + "ShipperName=?, Phone=? "
+                    + "WHERE "
+                    + "ShipperId=?");
             ps.setString(1, shipper.getShipperName());
             ps.setString(2, shipper.getPhone());
             ps.executeUpdate();
@@ -72,7 +86,9 @@ public class ShipperDao implements ShipperDaoInt{
         PreparedStatement ps = null;
         ResultSet rs = null;
         try{
-            ps = con.prepareStatement("INSERT INTO shippers(ShipperName, Phone) VALUES(?,?)");
+            ps = con.prepareStatement("INSERT INTO "
+                    + "shippers(ShipperName, Phone) "
+                    + "VALUES(?,?)");
             ps.setString(1, shipper.getShipperName());
             ps.setString(2, shipper.getPhone());
             ps.executeUpdate();
@@ -87,7 +103,10 @@ public class ShipperDao implements ShipperDaoInt{
                 ResultSet rs = null;
                 List <Shipper> l = new ArrayList<>();
                 try{
-                    ps = con.prepareStatement("SELECT * FROM shippers");
+                    ps = con.prepareStatement("SELECT"
+                            + " * "
+                            + "FROM "
+                            + "shippers");
                    
                     rs = ps.executeQuery();
                     while (rs.next()) {
