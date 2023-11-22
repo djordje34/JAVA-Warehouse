@@ -105,7 +105,7 @@ public class ProductDao implements ProductDaoInt{
                     ps = con.prepareStatement("SELECT * FROM products");
                    
                     rs = ps.executeQuery();
-                    if (rs.next()) {
+                    while (rs.next()) {
                         Supplier supplier = SupplierDao.getInstance().find(con, rs.getInt("SupplierId"));
                         l.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), 
                                 rs.getString("ProductCategory"), rs.getInt("PricePerUnit"), supplier));
@@ -115,6 +115,92 @@ public class ProductDao implements ProductDaoInt{
                     ResourcesManager.closeResources(rs, ps);
                 }
                 return l;
+    }
+
+    public List<Product> findAllFromSupplier(Connection con,int dataObjectId) throws SQLException{
+                PreparedStatement ps = null;
+                ResultSet rs = null;
+                List <Product> l = new ArrayList<>();
+                try{
+                    ps = con.prepareStatement("    SELECT\n" +
+                                                "  *\n" +
+                                                "FROM\n" +
+                                                "  products\n" +
+                                                "WHERE\n" +
+                                                "  SupplierId=?");
+                    ps.setInt(1, dataObjectId);
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        Supplier supplier = SupplierDao.getInstance().find(con, rs.getInt("SupplierId"));
+                        l.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), 
+                                rs.getString("ProductCategory"), rs.getInt("PricePerUnit"), supplier));
+                    }
+                }
+                finally{
+                    ResourcesManager.closeResources(rs, ps);
+                }
+                return l;
+    }
+    
+    
+    public List<Product> findAllFromShipper(Connection con,int dataObjectId) throws SQLException{
+                PreparedStatement ps = null;
+                ResultSet rs = null;
+                List <Product> l = new ArrayList<>();
+                try{
+                        ps = con.prepareStatement("SELECT\n" +
+                            "  p.*\n" +
+                            "FROM\n" +
+                            "  products p\n" +
+                            "JOIN\n" +
+                            "  orderdetails od ON p.ProductId = od.ProductId\n" +
+                            "JOIN\n" +
+                            "  orders o ON od.OrderId = o.OrderId\n" +
+                            "WHERE\n" +
+                            "  o.ShipperId=?");
+                    ps.setInt(1, dataObjectId);
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        Supplier supplier = SupplierDao.getInstance().find(con, rs.getInt("SupplierId"));
+                        l.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), 
+                                rs.getString("ProductCategory"), rs.getInt("PricePerUnit"), supplier));
+                    }
+                }
+                finally{
+                    ResourcesManager.closeResources(rs, ps);
+                }
+                return l;
+    }
+    
+    public List<Product> findTwoMostPopular(Connection con) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List <Product> l = new ArrayList<>();
+        try{
+            ps = con.prepareStatement("SELECT\n" +
+                    "  p.*,\n" +
+                    "  COUNT(*) AS br_order\n" +
+                    "FROM\n" +
+                    "  products p\n" +
+                    "JOIN\n" +
+                    "  orderdetails od ON p.ProductId = od.ProductId\n" +
+                    "GROUP BY\n" +
+                    "  p.ProductId, p.ProductName\n" +
+                    "ORDER BY\n" +
+                    "  br_order DESC\n" +
+                    "LIMIT 2;");
+                    rs = ps.executeQuery();
+                    while(rs.next()){
+                        Supplier supplier = SupplierDao.getInstance().find(con, rs.getInt("SupplierId"));
+                        l.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), 
+                                rs.getString("ProductCategory"), rs.getInt("PricePerUnit"), supplier));
+                    System.out.println("ProductId: "+ rs.getInt("ProductId") + " Broj narucivanja: " + rs.getInt("br_order"));
+                    }
+        }
+        finally{
+            ResourcesManager.closeResources(rs, ps);
+        }
+        return l;
     }
     
 }

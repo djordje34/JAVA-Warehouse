@@ -120,7 +120,7 @@ public class OrderDao implements OrderDaoInt{
                     ps = con.prepareStatement("SELECT * FROM orders");
                    
                     rs = ps.executeQuery();
-                    if (rs.next()) {
+                    while (rs.next()) {
                         Shipper shipper = ShipperDao.getInstance().find(con, rs.getInt("ShipperId"));
                         Customer customer = CustomerDao.getInstance().find(con, rs.getInt("CustomerId"));
                         Employee employee = EmployeeDao.getInstance().find(con, rs.getInt("EmployeeId"));

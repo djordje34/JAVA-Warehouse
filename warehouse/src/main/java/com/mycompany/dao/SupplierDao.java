@@ -104,7 +104,7 @@ public class SupplierDao implements SupplierDaoInt{
                     ps = con.prepareStatement("SELECT * FROM suppliers");
                    
                     rs = ps.executeQuery();
-                    if (rs.next()) {
+                    while (rs.next()) {
                         l.add(new Supplier(rs.getInt("SupplierId"), rs.getString("SupplierName"), 
                                 rs.getString("ContactPerson"), rs.getString("Address"),
                                 rs.getString("City"), rs.getInt("PostCode"),rs.getString("Country"),

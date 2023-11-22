@@ -95,7 +95,7 @@ public class EmployeeDao implements EmployeeDaoInt{
                     ps = con.prepareStatement("SELECT * FROM employees");
                    
                     rs = ps.executeQuery();
-                    if (rs.next()) {
+                    while (rs.next()) {
                         l.add(new Employee(rs.getInt("EmployeeId"), rs.getString("LastName"), 
                                 rs.getString("FirstName"), rs.getDate("BirthDate")));
                     }
@@ -104,6 +104,40 @@ public class EmployeeDao implements EmployeeDaoInt{
                     ResourcesManager.closeResources(rs, ps);
                 }
                 return l;
+    }
+    
+    
+        public Employee getBestSelling(Connection con) throws SQLException {
+        PreparedStatement ps =null;
+        ResultSet rs = null;
+        Employee emp = null;
+        try{
+            ps = con.prepareStatement("SELECT\n" +
+                        "  e.EmployeeId,\n" +
+                        "  SUM(p.PricePerUnit * od.Quantity) AS uk_cena\n" +
+                        "FROM\n" +
+                        "  employees e\n" +
+                        "JOIN\n" +
+                        "  orders o ON e.EmployeeId = o.EmployeeId\n" +
+                        "JOIN\n" +
+                        "  orderdetails od ON o.OrderId = od.OrderId\n" +
+                        "JOIN\n" +
+                        "  products p ON od.ProductId = p.ProductId\n" +
+                        "GROUP BY \n" +
+                        "  e.EmployeeId, e.LastName, e.FirstName \n" +
+                        "ORDER BY \n" +
+                        "  uk_cena DESC \n" +
+                        "LIMIT 1;");
+            rs = ps.executeQuery();
+            if(rs.next()){
+                int employeeId = rs.getInt("EmployeeId");
+               emp = instance.find(con, employeeId);
+            }
+        }
+        finally{
+            ResourcesManager.closeResources(rs, ps);
+        } 
+        return emp;
     }
     
 }

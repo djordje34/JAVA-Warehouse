@@ -90,7 +90,7 @@ public class ShipperDao implements ShipperDaoInt{
                     ps = con.prepareStatement("SELECT * FROM shippers");
                    
                     rs = ps.executeQuery();
-                    if (rs.next()) {
+                    while (rs.next()) {
                         l.add(new Shipper(rs.getInt("ShipperId"), 
                     rs.getString("ShipperName"),rs.getString("Phone")));
                     }

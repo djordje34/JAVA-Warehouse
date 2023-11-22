@@ -15,7 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.HashMap;
+import java.util.Map;
 /**
  *
  * @author Djordje
@@ -117,7 +118,7 @@ public class OrderDetailsDao implements OrderDetailsDaoInt{
                     ps = con.prepareStatement("SELECT * FROM orderdetails");
                    
                     rs = ps.executeQuery();
-                    if (rs.next()) {
+                    while (rs.next()) {
                         Order order = OrderDao.getInstance().find(con, rs.getInt("OrderId"));
                         Product product = ProductDao.getInstance().find(con, rs.getInt("ProductId"));
             
@@ -129,6 +130,126 @@ public class OrderDetailsDao implements OrderDetailsDaoInt{
                 }
                 return l;
     }
+    
+    
+    public int sumAllOrdersPrices(Connection con) throws SQLException{
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int res = 0;
+        try{
+                    ps = con.prepareStatement("SELECT\n" +
+                                        " SUM(p.PricePerUnit * od.Quantity) AS uk_cena\n" +
+                                        "FROM\n" +
+                                        "  orderdetails od\n" +
+                                        "JOIN\n" +
+                                        "  products p ON od.ProductId = p.ProductId;");
+                   
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        res += rs.getInt("uk_cena");
+                    }
+                }
+                finally{
+                    ResourcesManager.closeResources(rs, ps);
+                }
+                return res;
+    }
+    
+    //zavrsimetodu
+    public int sumOrderPricesFromCustomer(Connection con, int dataObjectId) throws SQLException{
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int uk_cena = 0;
+        try{
+                    ps = con.prepareStatement("SELECT \n" +
+                            "  SUM(p.PricePerUnit * od.Quantity) AS uk_cena\n" +
+                            "FROM\n" +
+                            "  customers c\n" +
+                            "JOIN\n" +
+                            "  orders o ON c.CustomerId = o.CustomerId\n" +
+                            "JOIN\n" +
+                            "  orderdetails od ON o.OrderId = od.OrderId\n" +
+                            "JOIN\n" +
+                            "  products p ON od.ProductId = p.ProductId\n" +
+                            "WHERE\n" +
+                            "  c.CustomerId = ?\n" +
+                            "GROUP BY\n" +
+                            "  c.CustomerId;");
+                   ps.setInt(1, dataObjectId);
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+    
+                        uk_cena = rs.getInt("uk_cena");
+                    }
+                }
+                finally{
+                    ResourcesManager.closeResources(rs, ps);
+                }
+                return uk_cena;
+    }
+    
+     public int sumOrderPricesFromShipper(Connection con, int dataObjectId) throws SQLException{
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int uk_cena = 0;
+        try{
+                    ps = con.prepareStatement("SELECT\n" +
+                                "  SUM(p.PricePerUnit * od.Quantity) AS uk_cena\n" +
+                                "FROM\n" +
+                                "  shippers s\n" +
+                                "JOIN\n" +
+                                "  orders o ON s.ShipperId = o.ShipperId\n" +
+                                "JOIN\n" +
+                                "  orderdetails od ON o.OrderId = od.OrderId\n" +
+                                "JOIN\n" +
+                                "  products p ON od.ProductId = p.ProductId\n" +
+                                "WHERE\n" +
+                                "  s.ShipperId=? \n" +
+                                "GROUP BY\n" +
+                                "  s.ShipperId;");
+                   ps.setInt(1, dataObjectId);
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+    
+                        uk_cena = rs.getInt("uk_cena");
+                    }
+                }
+                finally{
+                    ResourcesManager.closeResources(rs, ps);
+                }
+                return uk_cena;
+    }
+     
+     public int sumOrderPricesFromSupplier(Connection con, int dataObjectId) throws SQLException{
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int uk_cena = 0;
+        try{
+                    ps = con.prepareStatement("SELECT\n" +
+                    "  SUM(p.PricePerUnit * od.Quantity) AS uk_cena\n" +
+                    "FROM\n" +
+                    "  suppliers sup\n" +
+                    "JOIN\n" +
+                    "  products p ON sup.SupplierId = p.SupplierId\n" +
+                    "JOIN\n" +
+                    "  orderdetails od ON p.ProductId = od.ProductId\n" +
+                    "WHERE\n" +
+                    "  sup.SupplierId=? \n" +
+                    "GROUP BY\n" +
+                    "  sup.SupplierId;");
+                   ps.setInt(1, dataObjectId);
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+    
+                        uk_cena = rs.getInt("uk_cena");
+                    }
+                }
+                finally{
+                    ResourcesManager.closeResources(rs, ps);
+                }
+                return uk_cena;
+    }
+     
     
     
 }

@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -99,7 +101,7 @@ public class CustomerDao implements CustomerDaoInt{
                     ps = con.prepareStatement("SELECT * FROM customers");
                    
                     rs = ps.executeQuery();
-                    if (rs.next()) {
+                    while (rs.next()) {
                         l.add(new Customer(rs.getInt("CustomerId"), rs.getString("CustomerName"), rs.getString("ContactPerson"),
                         rs.getString("Address"), rs.getString("City"),rs.getInt("PostCode"),rs.getString("Country")));
                     }
@@ -109,4 +111,35 @@ public class CustomerDao implements CustomerDaoInt{
                 }
                 return l;
     }
+    
+    public List<String> getAllWithOrders(Connection con) throws SQLException {
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    List<String> l = new ArrayList<>();
+
+    try {
+        ps = con.prepareStatement("SELECT\n" +
+                "  c.CustomerName,\n" +
+                "  o.OrderId\n" +
+                "FROM\n" +
+                "  customers c\n" +
+                "JOIN\n" +
+                "  orders o ON c.CustomerId = o.CustomerId\n" +
+                "ORDER BY\n" +
+                "  c.CustomerName;");
+
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            String customerName = rs.getString("CustomerName");
+            int orderId = rs.getInt("OrderId");
+            String resultString = customerName + " " + orderId;
+            l.add(resultString);
+        }
+    } finally {
+        ResourcesManager.closeResources(rs, ps);
+    }
+
+    return l;
+    }
+    
 }
