@@ -6,13 +6,15 @@ The Warehouse Management System is designed to streamline the process of managin
 
 ## Features
 
-- Customer and order management
-- Product tracking
-- Supplier information management
+- Customer, employee and order management
+- Product and order tracking
+- Supplier and shipper information management
 
 ## Prerequisites
 
-- Java 8 or higher
+- JDK 11
+- Payara Server
+- Java EE 8 Web
 - MySQL database
 
 ## Cloning
