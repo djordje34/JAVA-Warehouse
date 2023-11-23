@@ -30,40 +30,40 @@ To use the Warehouse Management System, navigate to [http://localhost:8080](http
 ## API Endpoints
 The Warehouse Management System includes the following API endpoints:
 
-### /api/customers: Manage customers
-- **GET /api/customers:** Get all customers
-- **GET /api/customers/{customerId}:** Get customer by ID
-- **POST /api/customers:** Create a new customer
-- **PUT /api/customers/{customerId}:** Update customer details
-- **DELETE /api/customers/{customerId}:** Delete a customer
+### /rest/customers: Manage customers
+- **GET /rest/customers:** Get all customers
+- **GET /rest/customers/{customerId}:** Get customer by ID
+- **POST /rest/customers:** Create a new customer
+- **PUT /rest/customers/{customerId}:** Update customer details
+- **DELETE /rest/customers/{customerId}:** Delete a customer
 
-### /api/products: Manage products
-- **GET /api/products:** Get all products
-- **GET /api/products/{productId}:** Get product by ID
-- **POST /api/products:** Create a new product
-- **PUT /api/products/{productId}:** Update product details
-- **DELETE /api/products/{productId}:** Delete a product
+### /rest/products: Manage products
+- **GET /rest/products:** Get all products
+- **GET /rest/products/{productId}:** Get product by ID
+- **POST /rest/products:** Create a new product
+- **PUT /rest/products/{productId}:** Update product details
+- **DELETE /rest/products/{productId}:** Delete a product
 
-### /api/suppliers: Manage suppliers
-- **GET /api/suppliers:** Get all suppliers
-- **GET /api/suppliers/{supplierId}:** Get supplier by ID
-- **POST /api/suppliers:** Create a new supplier
-- **PUT /api/suppliers/{supplierId}:** Update supplier details
-- **DELETE /api/suppliers/{supplierId}:** Delete a supplier
+### /rest/suppliers: Manage suppliers
+- **GET /rest/suppliers:** Get all suppliers
+- **GET /rest/suppliers/{supplierId}:** Get supplier by ID
+- **POST /rest/suppliers:** Create a new supplier
+- **PUT /rest/suppliers/{supplierId}:** Update supplier details
+- **DELETE /rest/suppliers/{supplierId}:** Delete a supplier
 
-### /api/orders: Manage orders
-- **GET /api/orders:** Get all orders
-- **GET /api/orders/{orderId}:** Get order by ID
-- **POST /api/orders:** Create a new order
-- **PUT /api/orders/{orderId}:** Update order details
-- **DELETE /api/orders/{orderId}:** Delete an order
+### /rest/orders: Manage orders
+- **GET /rest/orders:** Get all orders
+- **GET /rest/orders/{orderId}:** Get order by ID
+- **POST /rest/orders:** Create a new order
+- **PUT /rest/orders/{orderId}:** Update order details
+- **DELETE /rest/orders/{orderId}:** Delete an order
 
 ## Examples
 Here are a few examples to demonstrate how to use the Warehouse Management System:
 
 - **Creating a new customer:**
-  Send a POST request to `/api/customers` with customer details.
+  Send a POST request to `/rest/customers` with customer details.
 - **Adding a new product:**
-  Send a POST request to `/api/products` with product details.
+  Send a POST request to `/rest/products` with product details.
 - **Placing a new order:**
-  Send a POST request to `/api/orders` with order details.
+  Send a POST request to `/rest/orders` with order details.
