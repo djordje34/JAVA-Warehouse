@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.rest;
-import com.mycompany.data.Employee;
+
+import com.mycompany.data.Product;
 import com.mycompany.exception.WarehouseException;
-import com.mycompany.service.EmployeeService;
+import com.mycompany.service.ProductService;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -22,49 +23,46 @@ import javax.ws.rs.core.Response;
  *
  * @author Djordje
  */
-@Path("employees")
-public class EmployeeRest {
-    private final EmployeeService employeeService = EmployeeService.getInstance();
+@Path("products")
+public class ProductRest {
+    private final ProductService productService = ProductService.getInstance();
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List <Employee> getAllEmployees() throws WarehouseException{
-        return employeeService.findAllEmployees();
+    public List <Product> getAllProducts() throws WarehouseException{
+        return productService.findAllProducts();
     }
     
     @GET
-    @Path("/{EmployeeId}")
+    @Path("/{ProductId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Employee getEmployeeById(@PathParam("EmployeeId") int employeeId) throws WarehouseException{
-        return employeeService.findEmployee(employeeId);
+    public Product getProductById(@PathParam("ProductId") int productId) throws WarehouseException{
+        return productService.findProduct(productId);
     }
-    
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addEmployee(Employee employee) throws WarehouseException{
-            employeeService.addNewEmployee(employee);
+    public Response addProduct(Product product) throws WarehouseException{
+            productService.addNewProduct(product);
             return Response.ok().build();
     }
     
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateEmployee(Employee employee) throws WarehouseException {
-            employeeService.updateEmployee(employee);
+    public Response updateProduct(Product product) throws WarehouseException {
+            productService.updateProduct(product);
             return Response.ok().build();
     }
     
     
     @DELETE
-    @Path("/{EmployeeId}")
+    @Path("/{ProductId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteEmployee(@PathParam("EmployeeId") int employeeId) throws WarehouseException{
-            employeeService.deleteEmployee(employeeId);
+    public Response deleteProduct(@PathParam("ProductId") int productId) throws WarehouseException{
+            productService.deleteProduct(productId);
             return Response.ok().build();
     }
-    
-    
     
 }

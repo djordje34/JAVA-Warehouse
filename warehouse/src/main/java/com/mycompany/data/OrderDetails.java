@@ -20,6 +20,10 @@ public class OrderDetails {
         this.product = product;
         this.quantity = quantity;
     }
+    
+    public OrderDetails(){
+        
+    }
 
     public int getOrderDetailsId() {
         return orderDetailsId;

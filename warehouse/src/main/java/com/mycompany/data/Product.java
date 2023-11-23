@@ -23,6 +23,10 @@ public class Product {
         this.supplier = supplier;
     }
 
+    public Product(){
+        
+    }
+    
     public int getProductId() {
         return productId;
     }

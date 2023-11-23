@@ -20,6 +20,10 @@ public class Shipper {
         this.phone = phone;
     }
 
+    public Shipper(){
+        
+    }
+    
     public int getShipperId() {
         return shipperId;
     }

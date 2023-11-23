@@ -24,6 +24,10 @@ public class Order {
         this.customer = customer;
         this.employee = employee;
     }
+    
+    public Order(){
+        
+    }
 
     public int getOrderId() {
         return orderId;

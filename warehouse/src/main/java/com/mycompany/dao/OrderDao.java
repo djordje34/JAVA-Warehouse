@@ -85,6 +85,7 @@ public class OrderDao{
             ps.setInt(2, order.getShipper().getShipperId());
             ps.setInt(3, order.getCustomer().getCustomerId());
             ps.setInt(4, order.getEmployee().getEmployeeId());
+            ps.setInt(5, order.getOrderId());
             ps.executeUpdate();
         } finally {
             ResourcesManager.closeResources(null, ps);

@@ -75,6 +75,7 @@ public class ShipperDao{
                     + "ShipperId=?");
             ps.setString(1, shipper.getShipperName());
             ps.setString(2, shipper.getPhone());
+            ps.setInt(3, shipper.getShipperId());
             ps.executeUpdate();
         }
         finally{

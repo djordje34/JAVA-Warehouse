@@ -28,6 +28,10 @@ public class Supplier {
         this.country = country;
         this.phone = phone;
     }
+    
+    public Supplier(){
+        
+    }
 
     public int getSupplierId() {
         return supplierId;

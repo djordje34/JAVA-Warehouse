@@ -82,6 +82,7 @@ public class SupplierDao{
             ps.setInt(5, supplier.getPostCode());
             ps.setString(6, supplier.getCountry());
             ps.setString(7, supplier.getPhone());
+            ps.setInt(8, supplier.getSupplierId());
             ps.executeUpdate();
         }
         finally{
