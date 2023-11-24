@@ -47,7 +47,7 @@ public class WarehouseDemo {
         //customerService.deleteCustomer(2);
         
         //employeeService.addNewEmployee(new Employee(-1,"Jedan","Dva", Date.valueOf("2001-11-19")));
-        
+        System.out.println("\n-------------------SQL SOLUTIONS-------------------\n");
         System.out.println("################## 1");
         List<String> l = new ArrayList<>();
         l = advancedService.getAllCustomersWithOrders();
@@ -73,6 +73,7 @@ public class WarehouseDemo {
         System.out.println(res2);
         System.out.println("################## 7");
         int res3 = advancedService.findAggregatedOrderPriceFromSupplier(2);
+        System.out.println(res3);
         System.out.println("################## 8");
         Employee e1 = advancedService.findBestSellingEmployee();
         System.out.println(e1);
@@ -90,6 +91,40 @@ public class WarehouseDemo {
         Supplier sup1 = advancedService.findMostProfitableSupplier();
         System.out.println(sup1);
         
+        System.out.println("\n----------------PURE JAVA SOLUTIONS----------------\n");
+        
+        System.out.println("################## 1.1");
+        advancedService.getAllCustomersWithOrdersJ();
+        
+        System.out.println("################## 2.1");
+        advancedService.findAllProductsFromSupplierJ(1);
+        
+        System.out.println("################## 3.1");
+        advancedService.findAllProductsFromShipperJ(1);
+        
+        System.out.println("################## 4.1");
+        advancedService.findAggregatedPriceJ();
+        
+        System.out.println("################## 5.1");
+        advancedService.findAggregatedOrderPriceFromCustomerJ(1);
+        
+        System.out.println("################## 6.1");
+        advancedService.findAggregatedOrderPriceFromShipperJ(1);
+        
+        System.out.println("################## 7.1");
+        advancedService.findAggregatedOrderPriceFromSupplierJ(2);
+        
+        System.out.println("################## 8.1");
+        advancedService.findBestSellingEmployeeJ();
+        
+        System.out.println("################## 9.1");
+        advancedService.findTwoMostPopularProductsJ();
+        
+        System.out.println("################## 10.1");
+        advancedService.findFourBestCustomersJ();
+        
+        System.out.println("################## 11.1");
+        advancedService.findMostProfitableSupplierJ();
     }
     
     

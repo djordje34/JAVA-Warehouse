@@ -71,7 +71,20 @@ public class Product {
     public String toString() {
         return "Product{" + "productId=" + productId + ", productName=" + productName + ", productCategory=" + productCategory + ", pricePerUnit=" + pricePerUnit + ", supplier=" + supplier + '}';
     }
-    
-    
+    //dodato zbog unique prod zadatka
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()){
+            return false;
+        }
+        Product product = (Product) o;
+        return productId == product.productId;
+    }
+
+    @Override
+    public int hashCode() {
+        return productId;
+    }
     
 }
