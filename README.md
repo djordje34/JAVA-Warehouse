@@ -25,10 +25,10 @@ Cloning the repository:
 ```
 
 ## Usage
-To use the Warehouse Management System, navigate to [http://localhost:8080/warehouse](http://localhost:8080/warehouse) in your web browser. Log in with your credentials and start managing orders and their details, products, customers, employees, shippers and suppliers.
+To use the Warehouse Management System, navigate to [http://localhost:8080/warehouse](http://localhost:8080/warehouse) in your web browser.
 
 ## API Endpoints
-The Warehouse Management System includes the following API endpoints:
+Some of the API endpoints defined in the Warehouse Management Project:
 
 ### /rest/customers: Manage customers
 - **GET /rest/customers:** Get all customers
