@@ -37,6 +37,13 @@ Some of the API endpoints defined in the Warehouse Management Project:
 - **PUT /rest/customers/{customerId}:** Update customer parameters
 - **DELETE /rest/customers/{customerId}:** Delete a customer
 
+### /rest/customers: Manage employees
+- **GET /rest/employees:** Get all employees
+- **GET /rest/employees/{employeeId}:** Get employee by ID
+- **POST /rest/employees:** Create a new employee
+- **PUT /rest/employees/{employeeId}:** Update employee parameters
+- **DELETE /rest/employees/{employeeId}:** Delete an employee
+
 ### /rest/products: Manage products
 - **GET /rest/products:** Get all products
 - **GET /rest/products/{productId}:** Get product by ID
@@ -51,12 +58,26 @@ Some of the API endpoints defined in the Warehouse Management Project:
 - **PUT /rest/suppliers/{supplierId}:** Update supplier parameters
 - **DELETE /rest/suppliers/{supplierId}:** Delete a supplier
 
+### /rest/shippers: Manage shippers
+- **GET /rest/shippers:** Get all shippers
+- **GET /rest/shippers/{shipperId}:** Get shipper by ID
+- **POST /rest/shippers:** Create a new shipper
+- **PUT /rest/shippers/{shipperId}:** Update shipper's parameters
+- **DELETE /rest/shippers/{shipperId}:** Delete a shipper
+
 ### /rest/orders: Manage orders
 - **GET /rest/orders:** Get all orders
 - **GET /rest/orders/{orderId}:** Get order by ID
 - **POST /rest/orders:** Create a new order
 - **PUT /rest/orders/{orderId}:** Update order parameters
 - **DELETE /rest/orders/{orderId}:** Delete an order
+
+### /rest/orderdetails: Manage order details
+- **GET /rest/orderdetails:** Get all order details
+- **GET /rest/orderdetails/{orderDetailsId}:** Get order details by ID
+- **POST /rest/orderdetails:** Create new order details
+- **PUT /rest/orderdetails/{orderDetailsId}:** Update order details parameters
+- **DELETE /rest/orderdetails/{orderDetailsId}:** Delete an order details item
 
 ## Examples
 Here are a few examples to demonstrate how to use the Warehouse Management System:
