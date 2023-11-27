@@ -105,7 +105,7 @@ public class ProductDao{
             ps.setInt(3, product.getPricePerUnit());
             Supplier supplier = SupplierDao.getInstance().find(con, product.getSupplier().getSupplierId());
             if (supplier == null) {
-                throw new SQLException("Shipper " + product.getSupplier() + " doesn't exist in database.");
+                throw new SQLException("Supplier " + product.getSupplier() + " doesn't exist in database.");
             }
             ps.setInt(4, supplier.getSupplierId());
             ps.executeUpdate();
