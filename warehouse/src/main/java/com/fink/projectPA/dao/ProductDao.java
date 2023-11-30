@@ -145,7 +145,7 @@ public class ProductDao{
                 ResultSet rs = null;
                 List <Product> l = new ArrayList<>();
                 try{
-                    ps = con.prepareStatement("SELECT " +
+                    ps = con.prepareStatement("SELECT DISTINCT " +
                                                 "* " +
                                                 "FROM " +
                                                 "products " +
@@ -171,7 +171,7 @@ public class ProductDao{
                 ResultSet rs = null;
                 List <Product> l = new ArrayList<>();
                 try{
-                        ps = con.prepareStatement("SELECT " +
+                        ps = con.prepareStatement("SELECT DISTINCT" +
                             "  p.* " +
                             "FROM" +
                             "  products p " +
