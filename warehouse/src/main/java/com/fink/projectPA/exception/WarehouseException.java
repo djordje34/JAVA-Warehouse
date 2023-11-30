@@ -11,11 +11,11 @@ package com.fink.projectPA.exception;
 public class WarehouseException extends Exception {
 
     public WarehouseException(String message) {
-        super("Warehouse service layer error: "+message);
+        super("-----WAREHOUSE DATABASE OPERATION ERROR-----\n Service layer error: " + message);
     }
 
     public WarehouseException(String message, Throwable cause) {
-        super("Warehouse service layer error: "+message, cause);
+        super("-----WAREHOUSE DATABASE OPERATION ERROR-----\n Service layer error: " + message, cause);
     }
 
 }

@@ -590,7 +590,7 @@ public class AdvancedService {
                     local_rev += or_d.getQuantity() * or_d.getProduct().getPricePerUnit();
                 }
             }
-            if(local_rev> max_rev){
+            if(local_rev > max_rev){
                 max_rev = local_rev;
                 bestSupplier = supp;
             }
