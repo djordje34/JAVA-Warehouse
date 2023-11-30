@@ -146,7 +146,7 @@ public class ProductDao{
                 List <Product> l = new ArrayList<>();
                 try{
                     ps = con.prepareStatement("SELECT DISTINCT " +
-                                                "* " +
+                                                " * " +
                                                 "FROM " +
                                                 "products " +
                                                 "WHERE " +
