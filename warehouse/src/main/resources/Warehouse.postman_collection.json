@@ -1,0 +1,922 @@
+{
+	"info": {
+		"_postman_id": "ccff35a5-67ac-4e1e-9605-969f7c0cc3e5",
+		"name": "Warehouse",
+		"description": "Java Warehouse REST API project requests collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31109232"
+	},
+	"item": [
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "getAllCustomers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomerById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/customers/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"customers",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCustomer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": 99,\r\n    \"customerName\":\"Neko ime\",\r\n    \"contactPerson\":\"Neki kontakt\",\r\n    \"address\": \"neka adresa 2\",\r\n    \"city\": \"Batocina 3\",\r\n    \"postCode\": 34000,\r\n    \"Country\": \"Srbija\"\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCustomer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/customers/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"customers",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": 7,\r\n    \"customerName\":\"Neko ime 2\",\r\n    \"contactPerson\":\"Neki kontakt 4\",\r\n    \"address\": \"neka adresa 2\",\r\n    \"city\": \"Batocina 3\",\r\n    \"postCode\": 34001,\r\n    \"Country\": \"Srbija\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Customers table"
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "getAllEmployees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmployeeById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/employees/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"employees",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEmployee",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"birthDate\": \"2000-10-18\",\r\n    \"employeeId\": 1,\r\n    \"firstName\": \"Djordje\",\r\n    \"lastName\": \"Karisic\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteEmployee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/employees/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"employees",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addEmployee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"birthDate\": \"1876-12-30\",\r\n        \"employeeId\": -498,\r\n        \"firstName\": \"First2\",\r\n        \"lastName\": \"Last2\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Suppliers",
+			"item": [
+				{
+					"name": "getAllSuppliers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"suppliers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSupplierById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/suppliers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"suppliers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSupplier",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"address\": \"Address1\",\r\n        \"city\": \"City1\",\r\n        \"contactPerson\": \"Contact1\",\r\n        \"country\": \"Serbia\",\r\n        \"phone\": \"0653141592\",\r\n        \"postCode\": 12345,\r\n        \"supplierId\": 1,\r\n        \"supplierName\": \"Supplier1\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"suppliers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSupplier",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/suppliers/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"suppliers",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addSupplier",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"supplierId\": -1,\r\n        \"supplierName\": \"Supply48\",\r\n        \"contactPerson\": \"Contact34\",\r\n        \"address\": \"Address 34, Address\",\r\n        \"city\": \"City of Somewhere\",\r\n        \"postCode\":34220,\r\n        \"country\":\"Zemlja 3\",\r\n        \"phone\": \"0606066001\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"suppliers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shippers",
+			"item": [
+				{
+					"name": "getAllShippers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/shippers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"shippers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getShipperById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/shippers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"shippers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateShipper",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\r\n        \"phone\": \"063845951\",\r\n        \"shipperId\": 2,\r\n        \"shipperName\": \"Shipper the Second\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/shippers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"shippers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteShipper",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/shippers/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"shippers",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addShipper",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\r\n        \"phone\": \"0622223333\",\r\n        \"shipperId\": 1,\r\n        \"shipperName\": \"Shipper One\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/shippers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"shippers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "getAllProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/products/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"pricePerUnit\": 11,\r\n    \"productCategory\": \"Category16\",\r\n    \"productId\": 1,\r\n    \"productName\": \"Product1\",\r\n    \"supplier\": {\r\n        \"address\": \"Address1\",\r\n        \"city\": \"City12\",\r\n        \"contactPerson\": \"Contact1\",\r\n        \"country\": \"Serbia\",\r\n        \"phone\": \"0653141592\",\r\n        \"postCode\": 12345,\r\n        \"supplierId\": 1,\r\n        \"supplierName\": \"Supplier1\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/products/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"products",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pricePerUnit\": 16,\r\n    \"productCategory\": \"Category1\",\r\n    \"productId\": 1,\r\n    \"productName\": \"Product177\",\r\n    \"supplier\": {\r\n        \"address\": \"Address1\",\r\n        \"city\": \"City1\",\r\n        \"contactPerson\": \"Contact1\",\r\n        \"country\": \"Serbia\",\r\n        \"phone\": \"0653141592\",\r\n        \"postCode\": 12345,\r\n        \"supplierId\": 1,\r\n        \"supplierName\": \"Supplier1\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "getAllOrders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/orders/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"orders",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrder",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"customer\": {\r\n            \"address\": \"Address1\",\r\n            \"city\": \"City1\",\r\n            \"contactPerson\": \"Contact1\",\r\n            \"country\": \"Country1\",\r\n            \"customerId\": 2,\r\n            \"customerName\": \"Customer1\",\r\n            \"postCode\": 12345\r\n        },\r\n        \"employee\": {\r\n            \"birthDate\": \"2000-10-17Z\",\r\n            \"employeeId\": 1,\r\n            \"firstName\": \"Djordje\",\r\n            \"lastName\": \"Karisic\"\r\n        },\r\n        \"orderDate\": \"2023-11-24\",\r\n        \"orderId\": 11,\r\n        \"shipper\": {\r\n            \"phone\": \"063845950\",\r\n            \"shipperId\": 1,\r\n            \"shipperName\": \"Shipper the First\"\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrder",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/orders/19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"orders",
+								"19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"customer\": {\r\n            \"address\": \"Nesto\",\r\n            \"city\": \"Batocina\",\r\n            \"contactPerson\": \"Neko\",\r\n            \"country\": \"Srbija\",\r\n            \"customerId\": 1,\r\n            \"customerName\": \"Djordje\",\r\n            \"postCode\": 34227\r\n        },\r\n        \"employee\": {\r\n            \"birthDate\": \"2000-10-17Z\",\r\n            \"employeeId\": 1,\r\n            \"firstName\": \"Djordje\",\r\n            \"lastName\": \"Karisic\"\r\n        },\r\n        \"orderDate\": \"2023-11-26\",\r\n        \"orderId\": 14,\r\n        \"shipper\": {\r\n            \"phone\": \"063845950\",\r\n            \"shipperId\": 1,\r\n            \"shipperName\": \"Shipper the First\"\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OrderDetails",
+			"item": [
+				{
+					"name": "getAllOrderDetails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/orderdetails",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"orderdetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderDetailsById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/orderdetails/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"orderdetails",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrderDetails",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order\": {\r\n        \"customer\": {\r\n            \"address\": \"Address1\",\r\n            \"city\": \"City1\",\r\n            \"contactPerson\": \"Contact1\",\r\n            \"country\": \"Country1\",\r\n            \"customerId\": 2,\r\n            \"customerName\": \"Customer1\",\r\n            \"postCode\": 12345\r\n        },\r\n        \"employee\": {\r\n            \"birthDate\": \"2000-10-17Z\",\r\n            \"employeeId\": 1,\r\n            \"firstName\": \"Djordje\",\r\n            \"lastName\": \"Karisic\"\r\n        },\r\n        \"orderDate\": \"2023-11-23Z\",\r\n        \"orderId\": 11,\r\n        \"shipper\": {\r\n            \"phone\": \"063845950\",\r\n            \"shipperId\": 1,\r\n            \"shipperName\": \"Shipper the First\"\r\n        }\r\n    },\r\n    \"orderDetailsId\": 3,\r\n    \"product\": {\r\n        \"pricePerUnit\": 11,\r\n        \"productCategory\": \"Category16\",\r\n        \"productId\": 1,\r\n        \"productName\": \"Product1\",\r\n        \"supplier\": {\r\n            \"address\": \"Address1\",\r\n            \"city\": \"City1\",\r\n            \"contactPerson\": \"Contact1\",\r\n            \"country\": \"Serbia\",\r\n            \"phone\": \"0653141592\",\r\n            \"postCode\": 12345,\r\n            \"supplierId\": 1,\r\n            \"supplierName\": \"Supplier1\"\r\n        }\r\n    },\r\n    \"quantity\": 9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/orderdetails",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"orderdetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrderDetails",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/orderdetails/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"orderdetails",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOrderDetails",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order\": {\r\n        \"customer\": {\r\n            \"address\": \"Address1\",\r\n            \"city\": \"City1\",\r\n            \"contactPerson\": \"Contact1\",\r\n            \"country\": \"Country1\",\r\n            \"customerId\": 7,\r\n            \"customerName\": \"Customer1\",\r\n            \"postCode\": 12345\r\n        },\r\n        \"employee\": {\r\n            \"birthDate\": \"2000-10-17Z\",\r\n            \"employeeId\": 3,\r\n            \"firstName\": \"Djordje\",\r\n            \"lastName\": \"Karisic\"\r\n        },\r\n        \"orderDate\": \"2023-11-11\",\r\n        \"orderId\": 66,\r\n        \"shipper\": {\r\n            \"phone\": \"063845957\",\r\n            \"shipperId\": 2,\r\n            \"shipperName\": \"Shipper the Twost\"\r\n        }\r\n    },\r\n    \"orderDetailsId\": 3,\r\n    \"product\": {\r\n        \"pricePerUnit\": 11,\r\n        \"productCategory\": \"Category16\",\r\n        \"productId\": 1,\r\n        \"productName\": \"Product1\",\r\n        \"supplier\": {\r\n            \"address\": \"Address1\",\r\n            \"city\": \"City1\",\r\n            \"contactPerson\": \"Contact1\",\r\n            \"country\": \"Serbia\",\r\n            \"phone\": \"0653141592\",\r\n            \"postCode\": 12345,\r\n            \"supplierId\": 1,\r\n            \"supplierName\": \"Supplier1\"\r\n        }\r\n    },\r\n    \"quantity\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouse/rest/orderdetails",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouse",
+								"rest",
+								"orderdetails"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
