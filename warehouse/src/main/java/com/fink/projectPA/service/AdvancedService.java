@@ -16,6 +16,7 @@ import com.fink.projectPA.data.Employee;
 import com.fink.projectPA.data.Order;
 import com.fink.projectPA.data.OrderDetails;
 import com.fink.projectPA.data.Product;
+import com.fink.projectPA.data.Shipper;
 import com.fink.projectPA.data.Supplier;
 import com.fink.projectPA.exception.WarehouseException;
 import java.sql.Connection;
@@ -596,6 +597,37 @@ public class AdvancedService {
             }
         }
         System.out.println(bestSupplier + ", with total money generated => " + max_rev);
+        
+    }
+    
+    public Set<Product> findSupplierShipperProducts(int supplierId, int shipperId) throws WarehouseException{
+        Connection con = null;
+        List<Shipper> shippers = new ArrayList<>();
+        List<Supplier> suppliers = new ArrayList<>();
+        List<OrderDetails> orderDetails = new ArrayList<>();
+        Set<Product> products = new HashSet<>();
+        try{
+            con = ResourcesManager.getConnection();
+            con.setAutoCommit(false);
+            orderDetails = OrderDetailsDao.getInstance().findAll(con);
+            con.commit();
+            for(OrderDetails or_d : orderDetails){
+            if(ProductDao.getInstance().find(con, or_d.getProduct().getProductId()).getSupplier().getSupplierId() == supplierId && OrderDao.getInstance().find(con, or_d.getOrder().getOrderId()).getShipper().getShipperId() == shipperId){
+                products.add(ProductDao.getInstance().find(con, or_d.getProduct().getProductId()));
+            }
+        }
+        }
+        catch(SQLException ex){
+            ResourcesManager.rollbackTransactions(con);
+            throw new WarehouseException("Failed to find the products with same supplier and shipper"  , ex);
+        }
+        finally{
+            ResourcesManager.closeConnection(con);
+        }
+        for(Product prod : products){
+            System.out.println(prod);
+        }
+        return products;
         
     }
     
