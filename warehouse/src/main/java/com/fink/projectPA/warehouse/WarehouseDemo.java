@@ -125,6 +125,10 @@ public class WarehouseDemo {
         
         System.out.println("################## 11.1");
         advancedService.findMostProfitableSupplierJ();
+        
+        System.out.println("####TASK####");
+        advancedService.findSupplierShipperProducts(1, 1);
+        
     }
     
     
