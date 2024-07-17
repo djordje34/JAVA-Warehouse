@@ -6,8 +6,10 @@ package com.fink.projectPA.rest;
 
 import com.fink.projectPA.data.Product;
 import com.fink.projectPA.exception.WarehouseException;
+import com.fink.projectPA.service.AdvancedService;
 import com.fink.projectPA.service.ProductService;
 import java.util.List;
+import java.util.Set;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,7 +28,7 @@ import javax.ws.rs.core.Response;
 @Path("products")
 public class ProductRest {
     private final ProductService productService = ProductService.getInstance();
-    
+    private final AdvancedService advancedService = AdvancedService.getInstance();
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List <Product> getAllProducts() throws WarehouseException{
@@ -39,6 +41,13 @@ public class ProductRest {
     public Product getProductById(@PathParam("ProductId") int productId) throws WarehouseException{
         return productService.findProduct(productId);
     }
+    
+      @GET
+    @Path("/test")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Set<Product> getBestCustomers() throws WarehouseException{
+        return advancedService.findSupplierShipperProducts(1,1);
+                }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
